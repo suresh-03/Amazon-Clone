@@ -1,0 +1,350 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.nav-bar{
+background-color: #0F1111;
+height: 80px;
+z-index: -1;
+}
+
+
+#logo{
+    margin-left: 20px;
+    top: 6px;
+    position: relative;
+    display: inline-block;
+}
+
+
+.nav-bar #logo img{
+    height: 50px;
+    width: 60px;
+}
+
+.nav-bar #loc-logo{
+    position: relative;
+    color: #CCCCCC;
+    display: inline-block;
+    left: 10px;
+    top: 7px;
+}
+
+.nav-bar .hello{
+    color: #CCCCCC;
+    display: inline;
+    position: absolute;
+    top: 31px;
+    left: 125px;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+}
+
+.nav-bar #location{
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    position: relative;
+    left: 10px;
+    font-size: 14px;
+    top: 7px;
+}
+
+.nav-bar .drop-down{
+    display: inline-block;
+    position: relative;
+    left: 20px;
+    bottom: 0.5px;
+}
+
+.nav-bar .drop-down select{
+    padding: 10.7px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: black;
+    background-color: #CCCCCC;
+    border-style: none;
+    outline: none;
+}
+
+.nav-bar .drop-down select:focus{
+    border-color: orange;
+    border-width: 4px;
+    outline: none;
+}
+
+.nav-bar .drop-down select:hover{
+    opacity: 0.8;
+}
+
+.nav-bar .search-bar{
+    display: inline-block;
+    position: relative;
+    left: 14.5px;
+    bottom: 1px;
+}
+
+.nav-bar .search-bar input{
+    padding: 11px;
+    width: 600px;
+    border-style: none;
+}
+
+.nav-bar .search-bar input:focus{
+    border-color: orange;
+    border-width: 4px;
+    outline: none;
+    outline-width: 0;
+}
+
+.nav-bar .search-button{
+    display: inline-block;
+    position: relative;
+    left: 9px;
+    bottom: 1px;
+    top: 15px;
+}
+
+.nav-bar .search-button input{
+    padding: 11px;
+    border-style: none;
+    background-color: #d28b07e9;
+    color: #0F1111;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-right: 35px;
+}
+
+.nav-bar .search-button input:hover{
+    background-color: orange;
+}
+
+.nav-bar .search-button #icon{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.nav-bar .lang{
+    display: inline-block;
+    position: relative;
+    left: 20px;
+}
+
+.nav-bar .lang img{
+    height: 16px;
+    width: 21;
+}
+
+
+.nav-bar .lang #lan{
+    height: 10px;
+    width: 20px;
+    display: inline-block;
+    color: #FFFFFF;
+    font-size:14px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    bottom: 3px;
+}
+
+.nav-bar #arrow-drop{
+    display: inline;
+    color: #CCCCCC;
+    position: relative;
+    top: 3px;
+    left: -2px;
+    cursor: pointer;
+}
+
+.label-hover:hover{
+    text-decoration: underline;
+    color: orange;
+}
+
+.nav-bar #drop-list{
+    position: relative;
+    left: -70px;
+    display: inline-block;
+}
+
+.link-hover:hover{
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+.nav-bar .accounts{
+    display: inline-block;
+    position: relative;
+    left: -20px;
+}
+
+.nav-bar .accounts .hel-sig{
+    color: #ffffff;
+    position: relative;
+    left: 40px;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    top: 30px;
+}
+
+.nav-bar .accounts .account{
+    color: #FFFFFF;
+    font-family: Arial, sans-serif;
+    position: relative;
+    left: 40px;
+    font-size: 14px;
+    top: 35px;
+}
+
+.nav-bar .accounts #acc-drop{
+    display: inline-block;
+    position: relative;
+    color: #CCCCCC;
+    left: 155px;
+    top: 2px;
+    cursor: pointer;
+}
+
+.nav-bar .accounts #sign-drop{
+    display: inline-block;
+    position: relative;
+    left: -85px;
+}
+
+.sign-hover:hover{
+    text-decoration: underline;
+}
+
+.start-hover:hover{
+    text-decoration: underline;
+    color: orange;
+    cursor: pointer;
+}
+
+.vl{
+    border-left: 1px solid gray;
+    height: 300px;
+    position: relative;
+    left: 250px;
+    display: inline-block;
+}
+
+.your-list{
+    display: inline-block;
+    position: relative;
+    bottom: 180px;
+}
+
+.unorder-list{
+    list-style: none;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #444444;
+}
+
+.inner-hover:hover{
+    text-decoration: underline;
+    color: orange;
+    cursor: pointer;
+}
+
+.your-account{
+    display: inline-block;
+    position: relative;
+    bottom: 95px;
+    left: 75px;
+}
+
+.unorder-list1{
+    list-style: none;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #444444;
+}
+
+.nav-bar .ret-orders{
+    display: inline-block;
+    position: relative;
+    left: 60px;
+}
+
+.nav-bar .ret-orders .ret{
+    color: #ffffff;
+    position: relative;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    top: 2px;
+}
+
+.nav-bar .ret-orders .order{
+    color: #FFFFFF;
+    font-family: Arial, sans-serif;
+    position: relative;
+    font-size: 14px;
+    top: 8px;
+}
+
+.nav-bar .cart{
+    display: inline-block;
+    position: relative;
+    left: 80px;
+    top: 20px;
+}
+
+.nav-bar .cart #count{
+    position: absolute;
+    color: orange;
+    font-family: Arial, Helvetica, sans-serif;
+    top: -15px;
+    left: 20px;
+}
+
+.nav-bar .cart #cart{
+    display: inline-block;
+    color: #ffffff;
+    font-size: 50px;
+}
+
+.nav-bar2{
+    position: relative;
+    height: 39px;
+    background-color:rgb(46, 46, 61);
+    z-index: -1;
+}
+
+.nav-bar2 .menu #menu{
+    display: inline-block;
+    position: relative;
+    left: 5px;
+    top: 7px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.nav-bar2 .menu #all{
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.nav-bar2 .others{
+    display: inline-block;
+    position: relative;
+} 
+
+.nav-bar2 .others span{
+    position: relative;
+    font-size: 14px;
+    color: #ffffff;
+    font-family: Arial,sans-serif;
+    bottom: 25px;
+    padding-left: 15px;
+    left: 65px;
+}
+
