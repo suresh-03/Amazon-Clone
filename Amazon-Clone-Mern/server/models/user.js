@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const validator = require("validator");
 
 const userSchema = new mongoose.Schema(
   {
@@ -27,16 +28,27 @@ const userSchema = new mongoose.Schema(
       required: true,
       min: 6,
     },
+    role: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
 
 userSchema.statics.signup = async function (name, mobileNo, email, password) {
   const emailExists = await this.findOne({ email });
-
   if (emailExists) {
-    return { message: "email already exists" };
+    throw new Error("email already exists");
   } else {
+    if (!email || !password) {
+      throw new Error("all fields are required");
+    }
+    if (!validator.isEmail(email)) {
+      throw new Error("enter valid email");
+    }
+    // if (!validator.isStrongPassword(password)) {
+    //   throw new Error("password is weak");
+    // }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hashSync(password, salt);
 
@@ -46,15 +58,22 @@ userSchema.statics.signup = async function (name, mobileNo, email, password) {
 };
 
 userSchema.statics.signin = async function (email, password) {
+  if (!email || !password) {
+    throw new Error("all fields are required");
+  }
+  if (!validator.isEmail(email)) {
+    throw new Error("enter valid email");
+  }
   const user = await this.findOne({ email });
+
   if (!user) {
-    return { message: "email not found" };
+    throw new Error("email not found");
   } else {
     const passwordMatch = bcrypt.compareSync(password, user.password);
     if (passwordMatch) {
       return user;
     } else {
-      return { message: "incorrect password" };
+      throw new Error("incorrect password");
     }
   }
 };

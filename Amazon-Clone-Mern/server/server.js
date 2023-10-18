@@ -12,6 +12,8 @@ connectDB();
 
 // signup and signin routes
 const userRoutes = require("./routes/user");
+const adminRoutes = require("./routes/admin");
+app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
 
 app.listen(process.env.PORT, () => {
