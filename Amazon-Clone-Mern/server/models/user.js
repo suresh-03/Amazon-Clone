@@ -10,11 +10,11 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     mobileNo: {
-      type: Number,
+      type: String,
       required: true,
       unique: true,
-      minLength: 10,
-      maxLength: 10,
+      min: 10,
+      max: 10,
     },
     email: {
       type: String,
