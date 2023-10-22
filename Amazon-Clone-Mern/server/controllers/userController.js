@@ -28,7 +28,7 @@ exports.signin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.signin(email, password);
-    if (user.role == "user") {
+    if (user.role === "user") {
       if (user) {
         const token = createToken(user._id, user.role);
         return res.json({ email, token });

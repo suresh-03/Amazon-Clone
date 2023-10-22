@@ -1,6 +1,5 @@
 const User = require("../models/user");
 
-
 // exports.signup = async (req, res) => {
 //   const { name, mobileNo, email, password } = req.body;
 //   try {

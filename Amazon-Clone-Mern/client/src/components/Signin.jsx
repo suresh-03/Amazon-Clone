@@ -10,11 +10,23 @@ function Signin() {
   const checkUser = async (event) => {
     const { name, value } = event.target;
     setData((prev) => ({ ...prev, [name]: value }));
-    await axios.post("http://localhost:3000/api/user/signin", data).then();
+    await axios
+      .post("http://localhost:3000/api/user/signin", data)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const handleSubmit = (e) => {
+    checkUser(e);
+    e.preventDefault();
   };
   return (
     <div className="Signin">
-      <form>
+      <form onSubmit={handleSubmit}>
         <FormInput
           name="email"
           type="email"

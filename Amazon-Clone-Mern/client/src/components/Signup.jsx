@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import FormInput from "./FormInput";
 import axios from "axios";
 import { useState } from "react";
@@ -11,10 +11,25 @@ function Signup() {
     password: "",
   });
 
+  const [token, setToken] = useState("");
+
   async function createUser(event) {
     const { name, value } = event.target;
     setValue((prev) => ({ ...prev, [name]: value }));
-    await axios.post("http://localhost:3000/api/user/signup", Value);
+    await axios
+      .post("http://localhost:3000/api/user/signup", Value)
+      .then((data) => {
+        if (data.data.token) {
+          console.log(data.data.token);
+          setToken(data.data.token);
+          console.log(token);
+        } else {
+          console.log(data.data.error);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   const handleSubmit = (event) => {
