@@ -13,7 +13,11 @@ function Signin() {
     await axios
       .post("http://localhost:3000/api/user/signin", data)
       .then((data) => {
-        console.log(data);
+        if (data.data.email) {
+          console.log("welcome");
+        } else {
+          console.log(data.data.error);
+        }
       })
       .catch((err) => {
         console.log(err.message);

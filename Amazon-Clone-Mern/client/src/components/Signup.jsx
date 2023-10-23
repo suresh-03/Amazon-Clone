@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import FormInput from "./FormInput";
 import axios from "axios";
 import { useState } from "react";
+import { redirect } from "react-router-dom";
 
 function Signup() {
   const [Value, setValue] = useState({
@@ -20,9 +21,7 @@ function Signup() {
       .post("http://localhost:3000/api/user/signup", Value)
       .then((data) => {
         if (data.data.token) {
-          console.log(data.data.token);
-          setToken(data.data.token);
-          console.log(token);
+          redirect("/api/user/signin");
         } else {
           console.log(data.data.error);
         }
