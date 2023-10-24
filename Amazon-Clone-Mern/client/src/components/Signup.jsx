@@ -2,12 +2,13 @@ import React, { useRef } from "react";
 import FormInput from "./FormInput";
 import axios from "axios";
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   const [Value, setValue] = useState({
     name: "",
-    mobileNo: "",
+    mobileNo: 0,
     email: "",
     password: "",
   });
@@ -21,7 +22,8 @@ function Signup() {
       .post("http://localhost:3000/api/user/signup", Value)
       .then((data) => {
         if (data.data.token) {
-          redirect("/api/user/signin");
+          alert("user regitration successfull!");
+          navigate("/api/user/signin");
         } else {
           console.log(data.data.error);
         }
@@ -33,7 +35,7 @@ function Signup() {
 
   const handleSubmit = (event) => {
     createUser(event);
-    setValue({ name: "", email: "", mobileNo: "", password: "" });
+    setValue({ name: "", email: "", mobileNo: 0, password: "" });
     event.preventDefault();
   };
 
@@ -48,8 +50,8 @@ function Signup() {
           name="name"
         />
         <FormInput
-          type="text"
-          value={Value.mobileNo}
+          type="number"
+          value={Value.mobileNo != 0 ? Value.mobileNo : ""}
           placeholder="Enter mobile number"
           setValue={setValue}
           name="mobileNo"

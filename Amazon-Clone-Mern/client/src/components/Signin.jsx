@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import FormInput from "./FormInput";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Signin() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -14,7 +16,8 @@ function Signin() {
       .post("http://localhost:3000/api/user/signin", data)
       .then((data) => {
         if (data.data.email) {
-          console.log("welcome");
+          alert("welcome to the app!");
+          navigate("/");
         } else {
           console.log(data.data.error);
         }

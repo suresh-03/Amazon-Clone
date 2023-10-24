@@ -10,11 +10,11 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     mobileNo: {
-      type: String,
+      type: mongoose.Schema.Types.Number,
       required: true,
       unique: true,
-      min: 10,
-      max: 10,
+      minLength: 10,
+      maxLength: 10,
     },
     email: {
       type: String,
@@ -37,14 +37,21 @@ const userSchema = new mongoose.Schema(
 
 userSchema.statics.signup = async function (name, mobileNo, email, password) {
   const emailExists = await this.findOne({ email });
+  const mobileExists = await this.findOne({ mobileNo });
   if (emailExists) {
     throw new Error("email already exists");
   } else {
-    if (!email || !password) {
+    if (!email || !password || !name || !mobileNo) {
       throw new Error("all fields are required");
     }
     if (!validator.isEmail(email)) {
       throw new Error("enter valid email");
+    }
+    if (mobileNo.toString().length < 10 || mobileNo.toString().length > 10) {
+      throw new Error("enter valid mobile number!");
+    }
+    if (mobileExists) {
+      throw new Error("moblile number already exists");
     }
     // if (!validator.isStrongPassword(password)) {
     //   throw new Error("password is weak");
