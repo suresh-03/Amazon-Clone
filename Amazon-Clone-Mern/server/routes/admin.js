@@ -1,5 +1,7 @@
 const express = require("express");
-const { signin } = require("../controllers/adminController");
+const { signin } = require("../controllers/admin/adminController");
+const { requireSignin } = require("../middlewares/middleware");
+const { dashboard } = require("../controllers/admin/dashboard");
 const router = express.Router();
 
 // for signup
@@ -7,5 +9,7 @@ const router = express.Router();
 
 // for signin
 router.post("/signin", signin);
+
+router.get("/dashboard", dashboard);
 
 module.exports = router;
