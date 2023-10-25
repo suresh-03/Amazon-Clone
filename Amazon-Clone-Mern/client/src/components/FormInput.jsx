@@ -11,6 +11,7 @@ function FormInput(props) {
     <div className="form-input">
       <input
         type={props.type}
+        ref={props.reff}
         value={props.value}
         placeholder={props.placeholder}
         onChange={handleChange}

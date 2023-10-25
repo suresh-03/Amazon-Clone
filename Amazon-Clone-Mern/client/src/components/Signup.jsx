@@ -1,11 +1,12 @@
-import React, { useRef } from "react";
+import React from "react";
 import FormInput from "./FormInput";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
+  const userRef = useRef();
   const [Value, setValue] = useState({
     name: "",
     mobileNo: 0,
@@ -13,16 +14,33 @@ function Signup() {
     password: "",
   });
 
-  const [token, setToken] = useState("");
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  const token = localStorage.getItem("token");
+  if (token) {
+    setAuthToken(token);
+  }
+
+  async function setAuthToken(token) {
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    } else {
+      delete axios.defaults.headers.common["Authorization"];
+    }
+  }
 
   async function createUser(event) {
     const { name, value } = event.target;
     setValue((prev) => ({ ...prev, [name]: value }));
     await axios
       .post("http://localhost:3000/api/user/signup", Value)
-      .then((data) => {
-        if (data.data.token) {
-          alert("user regitration successfull!");
+      .then((response) => {
+        if (response.data.token) {
+          const token = response.data.token;
+          localStorage.setItem("token", token);
+          setAuthToken(token);
           navigate("/api/user/signin");
         } else {
           console.log(data.data.error);
@@ -44,6 +62,7 @@ function Signup() {
       <form onSubmit={handleSubmit}>
         <FormInput
           type="text"
+          reff={userRef}
           placeholder="Enter name"
           value={Value.name}
           setValue={setValue}
