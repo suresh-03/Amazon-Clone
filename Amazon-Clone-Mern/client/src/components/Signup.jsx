@@ -18,19 +18,6 @@ function Signup() {
     userRef.current.focus();
   }, []);
 
-  const token = localStorage.getItem("token");
-  if (token) {
-    setAuthToken(token);
-  }
-
-  async function setAuthToken(token) {
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    } else {
-      delete axios.defaults.headers.common["Authorization"];
-    }
-  }
-
   async function createUser(event) {
     const { name, value } = event.target;
     setValue((prev) => ({ ...prev, [name]: value }));

@@ -10,10 +10,10 @@ function AdminDashboard() {
   dashboard();
 
   return (
-    <div>
-      <NavLink to="/api/admin/dashboard">Dashboard</NavLink>
+    <>
       <NavLink to="/api/admin/signin">signin</NavLink>
-    </div>
+      <NavLink to="/api/admin/dashboard">dashboard</NavLink>
+    </>
   );
 }
 

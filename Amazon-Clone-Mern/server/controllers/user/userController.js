@@ -17,6 +17,8 @@ exports.signup = async (req, res) => {
 
     if (user) {
       const token = createToken(user._id, user.role);
+      // req.session.token = token;
+      req.headers.authorization = token;
       return res.json({ email, token });
     }
   } catch (err) {
@@ -31,6 +33,9 @@ exports.signin = async (req, res) => {
     if (user.role === "user") {
       if (user) {
         const token = createToken(user._id, user.role);
+        // req.session.token = token;
+        req.headers.authorization = token;
+        console.log(req.headers);
         return res.json({ email, token });
       }
     } else {

@@ -11,14 +11,13 @@ function Signin() {
   });
   const checkUser = async (event) => {
     const { name, value } = event.target;
-    let isAuth = false;
     setData((prev) => ({ ...prev, [name]: value }));
     await axios
       .post("http://localhost:3000/api/admin/signin", data)
       .then((data) => {
         if (data.data.email) {
-          alert("welcome to the dashboard admin!");
-          isAuth = true;
+          axios.defaults.headers.common.Authorization = data.data.token;
+          navigate("/api/admin/dashboard", { replace: true });
         } else {
           console.log(data.data.error);
         }

@@ -1,6 +1,6 @@
 const express = require("express");
 const { signin } = require("../controllers/admin/adminController");
-const { requireSignin } = require("../middlewares/middleware");
+const { requireSignin, adminMiddleware } = require("../middlewares/middleware");
 const { dashboard } = require("../controllers/admin/dashboard");
 const router = express.Router();
 
@@ -10,6 +10,6 @@ const router = express.Router();
 // for signin
 router.post("/signin", signin);
 
-router.get("/dashboard", dashboard);
+router.get("/dashboard", requireSignin, adminMiddleware, dashboard);
 
 module.exports = router;

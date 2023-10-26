@@ -30,6 +30,7 @@ exports.signin = async (req, res) => {
     if (user.role === "admin") {
       if (user) {
         const token = createToken(user._id, user.role);
+        req.headers.authorization = token;
         return res.json({ email, token });
       }
     } else {
@@ -40,6 +41,4 @@ exports.signin = async (req, res) => {
   }
 };
 
-exports.signout = async (req,res) => {
-  
-}
+exports.signout = async (req, res) => {};

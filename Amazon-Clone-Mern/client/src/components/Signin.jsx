@@ -3,7 +3,7 @@ import FormInput from "./FormInput";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Signin() {
+function Signin({ setUser }) {
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
@@ -16,6 +16,9 @@ function Signin() {
       .post("http://localhost:3000/api/user/signin", data)
       .then((data) => {
         if (data.data.email) {
+          setUser(data.data.email);
+          axios.defaults.headers.common.Authorization = data.data.token;
+          console.log(axios.defaults.headers.common.Authorization);
           alert("welcome to the app!");
           navigate("/");
         } else {
