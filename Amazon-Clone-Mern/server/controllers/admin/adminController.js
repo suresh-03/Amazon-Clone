@@ -23,6 +23,18 @@ function createToken(_id, role) {
 //   }
 // };
 
+const setTokenAuth = (req, token) => {
+  return new Promise((resolve, reject) => {
+    if (token) {
+      resolve(() => {
+        req.headers.authorization = token;
+      });
+    } else {
+      reject("no token");
+    }
+  });
+};
+
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -30,8 +42,12 @@ exports.signin = async (req, res) => {
     if (user.role === "admin") {
       if (user) {
         const token = createToken(user._id, user.role);
-        req.headers.authorization = token;
-        return res.json({ email, token });
+        await setTokenAuth(req, token)
+          .then(() => {
+            console.log("token in header");
+          })
+          .catch((err) => console.log(err));
+        res.json({ email, token });
       }
     } else {
       res.json({ message: "access denied" });
