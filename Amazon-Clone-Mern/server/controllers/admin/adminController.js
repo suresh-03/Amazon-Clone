@@ -1,5 +1,6 @@
 const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
+exports.loggedIn = false;
 
 function createToken(_id, role) {
   const token = jwt.sign({ user: _id, role: role }, process.env.SECRET_KEY, {
@@ -44,16 +45,17 @@ exports.signin = async (req, res) => {
         const token = createToken(user._id, user.role);
         await setTokenAuth(req, token)
           .then(() => {
+            loggedIn = true;
             console.log("token in header");
           })
           .catch((err) => console.log(err));
-        res.json({ email, token });
+        return res.json({ email, token });
       }
     } else {
-      res.json({ message: "access denied" });
+      return res.json({ message: "access denied" });
     }
   } catch (err) {
-    res.json({ error: err.message });
+    return res.json({ error: err.message });
   }
 };
 

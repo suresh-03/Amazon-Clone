@@ -3,6 +3,18 @@ import FormInput from "./FormInput";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// function setAuthToken(token) {
+//   return new Promise((resolve, reject) => {
+//     if (token) {
+//       resolve(() => {
+//         axios.defaults.headers.common.Authorization = token;
+//       });
+//     } else {
+//       reject("token is empty");
+//     }
+//   });
+// }
+
 function Signin() {
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -16,7 +28,14 @@ function Signin() {
       .post("http://localhost:3000/api/admin/signin", data)
       .then((data) => {
         if (data.data.email) {
-          axios.defaults.headers.common.Authorization = data.data.token;
+          // await setAuthToken(data.data.token)
+          //   .then(() => {
+          //     console.log("token is in the header");
+          //   })
+          //   .catch((err) => console.log(err));
+          localStorage.setItem("login", data.data.token);
+          axios.defaults.headers.common.Authorization =
+            localStorage.getItem("login");
           navigate("/api/admin/dashboard", { replace: true });
         } else {
           console.log(data.data.error);

@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
+const { loggedIn } = require("../controllers/admin/adminController");
 
 function requireSignin(req, res, next) {
+  if(loggedIn)
   if (req.headers.authorization) {
     const token = req.headers.authorization;
     const user = jwt.verify(token, process.env.SECRET_KEY);
     req.user = user;
   } else {
-    res.status(400).json({ message: "Authorization required" });
+    return res.status(400).json({ message: "Authorization required" });
   }
 
   next();

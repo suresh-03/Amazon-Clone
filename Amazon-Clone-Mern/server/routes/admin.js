@@ -1,7 +1,7 @@
 const express = require("express");
 const { signin } = require("../controllers/admin/adminController");
-const { requireSignin } = require("../middlewares/middleware");
 const { dashboard } = require("../controllers/admin/dashboard");
+const { requireSignin } = require("../middlewares/middleware");
 const router = express.Router();
 
 // for signup

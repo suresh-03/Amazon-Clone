@@ -1,3 +1,3 @@
 exports.dashboard = (req, res) => {
-  res.json({ msg: "dashboard" });
+  return res.json({ msg: "dashboard" });
 };
