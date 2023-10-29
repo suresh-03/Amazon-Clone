@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function Signup({ setAuth }) {
   const navigate = useNavigate();
   const userRef = useRef();
   const [Value, setValue] = useState({
@@ -25,10 +25,14 @@ function Signup() {
       .post("http://localhost:3000/api/user/signup", Value)
       .then((response) => {
         if (response.data.token) {
+          console.log(response.data.token);
           const token = response.data.token;
           localStorage.setItem("token", token);
-          setAuthToken(token);
-          navigate("/api/user/signin");
+          axios.defaults.headers.common.Authorization =
+            localStorage.getItem("token");
+          setAuth(true);
+
+          navigate("/api/user/signin", { replace: true });
         } else {
           console.log(data.data.error);
         }

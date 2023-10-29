@@ -1,9 +1,10 @@
 const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
+const { setTokenAuth } = require("../admin/adminController");
 
 function createToken(_id, role) {
   const token = jwt.sign({ user: _id, role: role }, process.env.SECRET_KEY, {
-    expiresIn: "1d",
+    expiresIn: "1h",
   });
   return token;
 }
@@ -18,7 +19,11 @@ exports.signup = async (req, res) => {
     if (user) {
       const token = createToken(user._id, user.role);
       // req.session.token = token;
-      req.headers.authorization = token;
+      await setTokenAuth(req, token)
+        .then(() => {
+          console.log("token is in the header");
+        })
+        .catch((err) => console.log(err));
       return res.json({ email, token });
     }
   } catch (err) {
@@ -34,8 +39,11 @@ exports.signin = async (req, res) => {
       if (user) {
         const token = createToken(user._id, user.role);
         // req.session.token = token;
-        req.headers.authorization = token;
-        console.log(req.headers);
+        await setTokenAuth(req, token)
+          .then(() => {
+            console.log("token is in the header");
+          })
+          .catch((err) => console.log(err));
         return res.json({ email, token });
       }
     } else {
@@ -44,4 +52,8 @@ exports.signin = async (req, res) => {
   } catch (err) {
     res.json({ error: err.message });
   }
+};
+
+exports.profile = (req, res) => {
+  return res.json({ profile: "user" });
 };

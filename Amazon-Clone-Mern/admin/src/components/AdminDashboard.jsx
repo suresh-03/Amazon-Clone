@@ -9,9 +9,9 @@ function AdminDashboard() {
   }, []);
 
   function checkAuthentication() {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("login")) {
       axios.defaults.headers.common.Authorization =
-        localStorage.getItem("token");
+        localStorage.getItem("login");
       setLogin(true);
     }
   }
@@ -19,14 +19,19 @@ function AdminDashboard() {
     const data = await axios.get("http://localhost:3000/api/admin/dashboard");
     console.log(data);
   }
-  dashboard();
+  if (login) {
+    dashboard();
+  }
 
   return (
     <>
       {!login ? (
         <NavLink to="/api/admin/signin">signin</NavLink>
       ) : (
-        <NavLink to="/api/admin/dashboard">dashboard</NavLink>
+        <>
+          <NavLink to="/api/admin/dashboard">dashboard</NavLink>
+          <NavLink to="/api/admin/logout">logout</NavLink>
+        </>
       )}
     </>
   );

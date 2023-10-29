@@ -4,7 +4,7 @@ exports.loggedIn = false;
 
 function createToken(_id, role) {
   const token = jwt.sign({ user: _id, role: role }, process.env.SECRET_KEY, {
-    expiresIn: "1d",
+    expiresIn: "1h",
   });
   return token;
 }
@@ -24,7 +24,7 @@ function createToken(_id, role) {
 //   }
 // };
 
-const setTokenAuth = (req, token) => {
+exports.setTokenAuth = (req, token) => {
   return new Promise((resolve, reject) => {
     if (token) {
       resolve(() => {
@@ -43,7 +43,7 @@ exports.signin = async (req, res) => {
     if (user.role === "admin") {
       if (user) {
         const token = createToken(user._id, user.role);
-        await setTokenAuth(req, token)
+        await this.setTokenAuth(req, token)
           .then(() => {
             loggedIn = true;
             console.log("token in header");
@@ -58,5 +58,3 @@ exports.signin = async (req, res) => {
     return res.json({ error: err.message });
   }
 };
-
-exports.signout = async (req, res) => {};

@@ -2,29 +2,35 @@ import React, { useState } from "react";
 import Signup from "../components/Signup";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import Signin from "../components/Signin";
+import Profile from "../components/Profile";
+import Logout from "../components/Logout";
 
 function RoutesApp() {
-  const [user, setUser] = useState("");
-  console.log(user);
+  const [login, setLogin] = useState(false);
   return (
     <BrowserRouter>
-      <NavLink to="/">home</NavLink>
-      {!user && (
-        <>
-          <NavLink to="/api/user/signup">signup</NavLink>
-          <NavLink to="/api/user/signin">signin</NavLink>
-        </>
-      )}
-
       <Routes>
-        <Route path="/"></Route>
-        {!user && (
+        {login ? (
           <>
             <Route
+              path="/api/user/profile"
+              element={<Profile setAuth={setLogin} />}
+            ></Route>
+            <Route
+              path="/api/user/logout"
+              element={<Logout setAuth={setLogin} />}
+            ></Route>
+          </>
+        ) : (
+          <>
+            <Route
+              path="/api/user/signup"
+              element={<Signup setAuth={setLogin} />}
+            ></Route>
+            <Route
               path="/api/user/signin"
-              element={<Signin setUser={setUser} />}
-            />
-            <Route path="/api/user/signup" element={<Signup />} />
+              element={<Signin setAuth={setLogin} />}
+            ></Route>
           </>
         )}
       </Routes>
