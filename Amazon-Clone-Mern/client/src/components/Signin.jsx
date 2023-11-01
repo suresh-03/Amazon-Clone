@@ -3,7 +3,7 @@ import FormInput from "./FormInput";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Signin({ setAuth }) {
+function Signin() {
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
@@ -19,11 +19,10 @@ function Signin({ setAuth }) {
           localStorage.setItem("token", data.data.token);
           axios.defaults.headers.common.Authorization =
             localStorage.getItem("token");
-          setAuth(true);
           alert("welcome to the app!");
           navigate("/api/user/profile", { replace: true });
         } else {
-          console.log(data.data.message);
+          console.log(data.data.error);
         }
       })
       .catch((err) => {

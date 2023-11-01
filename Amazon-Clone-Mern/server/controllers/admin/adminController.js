@@ -52,7 +52,7 @@ exports.signin = async (req, res) => {
         return res.json({ email, token });
       }
     } else {
-      return res.json({ message: "access denied" });
+      return res.json({ error: "access denied" });
     }
   } catch (err) {
     return res.json({ error: err.message });

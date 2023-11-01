@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Signup({ setAuth }) {
+function Signup() {
   const navigate = useNavigate();
   const userRef = useRef();
   const [Value, setValue] = useState({
@@ -30,7 +30,6 @@ function Signup({ setAuth }) {
           localStorage.setItem("token", token);
           axios.defaults.headers.common.Authorization =
             localStorage.getItem("token");
-          setAuth(true);
 
           navigate("/api/user/signin", { replace: true });
         } else {

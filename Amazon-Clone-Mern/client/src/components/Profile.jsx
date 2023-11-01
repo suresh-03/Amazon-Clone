@@ -2,25 +2,25 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 
-function Profile({ setAuth }) {
+function Profile() {
   const [login, setLogin] = useState(false);
+  const [data, setData] = useState("");
   function checkAuth() {
     if (localStorage.getItem("token")) {
       axios.defaults.headers.common.Authorization =
         localStorage.getItem("token");
       if (axios.defaults.headers.common.Authorization) {
         setLogin(true);
-        setAuth(login);
       }
     }
   }
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [login]);
 
   async function getProfile() {
     const data = await axios.get("http://localhost:3000/api/user/profile");
-    console.log(data);
+    setData(data.data.profile);
   }
   if (login) {
     getProfile();
@@ -31,6 +31,7 @@ function Profile({ setAuth }) {
         <>
           <NavLink to="/api/user/profile">profile</NavLink>
           <NavLink to="/api/user/logout">logout</NavLink>
+          <h1>{data}</h1>
         </>
       ) : (
         <>

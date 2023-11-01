@@ -47,7 +47,7 @@ exports.signin = async (req, res) => {
         return res.json({ email, token });
       }
     } else {
-      res.json({ message: "access denied" });
+      res.json({ error: "access denied" });
     }
   } catch (err) {
     res.json({ error: err.message });
