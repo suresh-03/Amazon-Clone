@@ -13,8 +13,10 @@ connectDB();
 // signup and signin routes
 const userRoutes = require("./routes/user");
 const adminRoutes = require("./routes/admin");
+const productRoutes = require("./routes/products");
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/admin", productRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`server is running in PORT ${process.env.PORT}`);

@@ -29,6 +29,7 @@ function AdminDashboard() {
         <NavLink to="/api/admin/signin">signin</NavLink>
       ) : (
         <>
+          <NavLink to="/api/admin/createProduct">create</NavLink>
           <NavLink to="/api/admin/dashboard">dashboard</NavLink>
           <NavLink to="/api/admin/logout">logout</NavLink>
         </>
