@@ -5,11 +5,10 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads");
+    cb(null, path.join(__dirname, "/images/"));
   },
   filename: function (req, file, cb) {
-    const fileName = req.file.filename;
-    cb(null, file.fieldname + "-" + fileName);
+    cb(null, file.fieldname + "-" + file.originalname);
   },
 });
 
@@ -21,7 +20,7 @@ exports.createProduct = async (req, res) => {
     description: req.body.description,
     img: {
       data: fs.readFileSync(
-        path.join(__dirname + "/uploads/" + req.file.filename)
+        path.join(__dirname + "/images/" + req.file.filename)
       ),
     },
   };
