@@ -4,6 +4,7 @@ import axios from "axios";
 
 function AdminDashboard() {
   const [login, setLogin] = useState(false);
+  const [image, setImage] = useState("");
   useEffect(() => {
     checkAuthentication();
   }, []);
@@ -17,7 +18,8 @@ function AdminDashboard() {
   }
   async function dashboard() {
     const data = await axios.get("http://localhost:3000/api/admin/dashboard");
-    console.log(data);
+    setImage(data.data.image);
+    console.log(data.data.image);
   }
   if (login) {
     dashboard();
@@ -32,6 +34,7 @@ function AdminDashboard() {
           <NavLink to="/api/admin/createProduct">create</NavLink>
           <NavLink to="/api/admin/dashboard">dashboard</NavLink>
           <NavLink to="/api/admin/logout">logout</NavLink>
+          <img src={image} />
         </>
       )}
     </>

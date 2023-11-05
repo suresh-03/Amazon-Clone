@@ -15,16 +15,33 @@ const storage = multer.diskStorage({
 exports.upload = multer({ storage: storage });
 
 exports.createProduct = async (req, res) => {
-  const image = {
+  const product = {
     name: req.body.name,
-    description: req.body.description,
-    img: {
-      data: fs.readFileSync(
-        path.join(__dirname + "/images/" + req.file.filename)
-      ),
-    },
+    categories: [
+      {
+        category: req.body.category,
+        subCategories: [
+          {
+            subCategory: req.body.subCategory,
+            brands: [
+              {
+                brandName: req.body.brandName,
+                products: [
+                  {
+                    prodName: req.body.prodName,
+                    prodDetails: req.body.prodDetails,
+                    prodReview: req.body.prodReview,
+                    prodImage: path.join("/images/" + req.file.filename),
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   };
-  Product.create(image)
+  Product.create(product)
     .then(() => {
       res.json("image uploaded");
     })

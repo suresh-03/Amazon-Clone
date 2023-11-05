@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Categories = require("./categories");
 
 const productSchema = new mongoose.Schema(
   {
@@ -9,8 +8,25 @@ const productSchema = new mongoose.Schema(
     },
     categories: [
       {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Categories",
+        category: String,
+        subCategories: [
+          {
+            subCategory: String,
+            brands: [
+              {
+                brandName: String,
+                products: [
+                  {
+                    prodName: String,
+                    prodImage: String,
+                    prodDetails: String,
+                    prodReview: String,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
   },

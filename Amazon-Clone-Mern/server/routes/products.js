@@ -6,7 +6,7 @@ const router = express.Router();
 router.post(
   "/createProduct",
   requireSignin,
-  upload.single("image"),
+  upload.single("prodImage"),
   createProduct
 );
 
